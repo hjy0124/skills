@@ -1,0 +1,91 @@
+{
+  "skill_name": "yudao-codegen-assistant",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我需要创建一个产品管理模块，包含以下字段：产品编码（varchar64唯一）、产品名称（varchar255）、价格（decimal10,2）、状态（tinyint 0-1）、库存数量（int）。请使用MySQL数据库。",
+      "expected_output": "输出应包含：1) MySQL SQL脚本；2) 简洁的文件目录树；3) 仅包含核心差异代码（DO类、Mapper接口特殊方法、无标准CRUD代码）。所有类必须使用@Data @Builder @NoArgsConstructor @AllArgsConstructor注解，无手工Getter/Setter。",
+      "assertions": [
+        {
+          "text": "生成MySQL SQL脚本，使用bit类型和内联COMMENT",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "DO类继承TenantBaseDO，使用Lombok注解",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "文件目录结构清晰简洁",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "仅输出核心业务逻辑，标准CRUD用注释代替",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "无样板代码和无关import",
+          "passed": false,
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "创建一个用户权限模块，PostgreSQL数据库。字段：用户ID（bigint）、用户名（varchar64）、邮箱（varchar255）、角色（varchar32）、状态（int2）。需要包含根据用户名查询的特殊功能。",
+      "expected_output": "输出应包含：1) PostgreSQL SQL脚本（使用int2类型和独立COMMENT）；2) 文件树；3) DO类、Mapper接口（包含按用户名查询方法）、Service接口（特殊查询逻辑）。无标准CRUD代码。",
+      "assertions": [
+        {
+          "text": "生成PostgreSQL SQL，使用int2类型和独立COMMENT",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "包含按用户名查询的特殊业务逻辑",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "无Getter/Setter方法，全部使用Lombok",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "只输出新增的业务方法",
+          "passed": false,
+          "evidence": ""
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "订单管理模块，SQL Server数据库。字段：订单ID（bigint）、订单号（varchar64）、客户ID（bigint）、总金额（decimal10,2）、订单状态（tinyint）。需要计算订单折扣的特殊逻辑。",
+      "expected_output": "极简输出：1) SQL Server SQL；2) 文件结构；3) DO类、Mapper接口（继承BaseMapperX）、Service接口（仅包含计算折扣方法）。Controller中只有折扣计算接口。",
+      "assertions": [
+        {
+          "text": "生成SQL Server语法正确的SQL",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "只包含计算折扣的业务逻辑",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "继承BaseMapperX，无重复实现",
+          "passed": false,
+          "evidence": ""
+        },
+        {
+          "text": "Token使用量显著减少（对比原版本）",
+          "passed": false,
+          "evidence": ""
+        }
+      ]
+    }
+  ]
+}
